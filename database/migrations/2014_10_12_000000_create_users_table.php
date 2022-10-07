@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('parent_id')->nullable();
             $table->integer('class_id')->nullable();
             $table->string('gender')->nullable();
+            $table->date('dob')->nullable();
             $table->string('image')->default('default.png');
             $table->string('phone')->nullable();
             $table->tinyInteger('status')->default(1)->comment('0=inactive,1=active');

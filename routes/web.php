@@ -4,8 +4,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IntelliSAS\SchoolController;
+use App\Http\Controllers\MarksController;
 use App\Http\Controllers\Settings\AssignSubjectsController;
 use App\Http\Controllers\Settings\BasicSettingsController;
+use App\Http\Controllers\Settings\CASchemeController;
 use App\Http\Controllers\Settings\ClassesController;
 use App\Http\Controllers\Settings\SectionsController;
 use App\Http\Controllers\Settings\SessionsController;
@@ -99,6 +101,11 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
         Route::post('/assign_subjects/index', [AssignSubjectsController::class, 'store']);
         Route::post('/assign_subjects/update', [AssignSubjectsController::class, 'update'])->name('settings.assign_subjects.update');
 
+        Route::get('/ca_scheme/index', [CASchemeController::class, 'index'])->name('settings.ca_scheme.index');
+        Route::post('/ca_scheme/index', [CASchemeController::class, 'store']);
+        Route::post('/ca_scheme/update', [CASchemeController::class, 'update'])->name('settings.ca_scheme.update');
+        Route::post('/ca_scheme/delete', [CASchemeController::class, 'delete'])->name('settings.ca_scheme.delete');
+
     });
 
 
@@ -113,11 +120,25 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
         
         Route::get('/students/bulk_update/index', [StudentsController::class, 'bulk_update'])->name('users.students.bulk_update.index');
         Route::post('/students/bulk_update/index', [StudentsController::class, 'bulk_update']);
+        Route::post('/students/bulk_update/store', [StudentsController::class, 'bulk_store'])->name('users.students.bulk_update.store');
      
+    });
+
+    Route::group(['prefix' => 'marks', 'middleware' => ['auth', 'admin']], function(){
+        Route::get('/create', [MarksController::class, 'create'])->name('marks.create');
+        Route::post('/create',  [MarksController::class, 'getMarks']);
+        Route::post('/initialize-marks-entry',  [MarksController::class, 'initializeMarks'])->name('initialize-marks-entry');
+        Route::post('/save-marks-entry',  [MarksController::class, 'saveMarks'])->name('save-marks-entry');
+        Route::post('/submit-marks-entry',  [MarksController::class, 'submitMarks'])->name('submit-marks-entry');
+        Route::post('/check-absent-marks-entry',  [MarksController::class, 'checkAbsentMarks'])->name('check-absent-marks-entry');
+        Route::post('/uncheck-absent-marks-entry',  [MarksController::class, 'uncheckAbsentMarks'])->name('uncheck-absent-marks-entry');
     
-      
-    
-    
+        Route::get('/submissions/index', [MarksController::class, 'submissionIndex'])->name('marks.submissions.index');
+        Route::post('/submissions/index', [MarksController::class, 'submissionSearch']);
+
+
+        Route::get('/grade_book/index', [MarksController::class, 'gradeBookIndex'])->name('marks.grade_book.index');
+        Route::post('/grade_book/index', [MarksController::class, 'gradeGookSearch']);
     });
 
 // });

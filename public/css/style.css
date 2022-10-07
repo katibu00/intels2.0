@@ -1,12 +1,6 @@
 /*
     Table of Contents
 
-    Name                 : Ventic
-    Author               : DexignZone
-    Author Portfolio     : https://themeforest.net/user/dexignzone/portfolio
-    
-
-
     Table of Sass Contents
 
     1. Abstracts
@@ -1932,7 +1926,12 @@ progress {
   margin-top: 0.25rem;
   font-size: 0.875em;
   color: #89879f; }
-
+  input[type="text"]:disabled {
+    background: #e0e0e0;
+  }
+  input[type="number"]:disabled {
+    background: #e0e0e0;
+  }
 .form-control {
   display: block;
   width: 100%;
@@ -1943,7 +1942,7 @@ progress {
   color: #969ba0;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #f5f5f5;
+  border: 1px solid #c2bcbc;
   appearance: none;
   border-radius: 0.75rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
@@ -1966,7 +1965,7 @@ progress {
     color: #6c757d;
     opacity: 0.5; }
   .form-control:disabled, .form-control[readonly] {
-    background-color: #e9ecef;
+    background-color: #d8dde2;
     opacity: 1; }
   .form-control::file-selector-button {
     padding: 0.375rem 0.75rem;
